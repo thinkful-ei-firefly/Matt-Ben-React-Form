@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import STORE from "./dummy-store";
+
 import App from "./App";
+import ErrorBoundary from "./ErrorBoundary";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App store={STORE} />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </BrowserRouter>,
   document.getElementById("root")
 );

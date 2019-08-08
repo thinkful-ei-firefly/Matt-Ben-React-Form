@@ -1,5 +1,5 @@
 .note-list-item {
-  height: 5rem;
+  min-height: 5rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -11,4 +11,8 @@
 .note-list-item .note-list-item__link {
   text-decoration: none;
   color: blue;
+}
+
+.note-list-item__button {
+  padding: 0.2rem;
 }

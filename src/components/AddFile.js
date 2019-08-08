@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import "./add-file.css";
 
 export default class AddFile extends Component {
   state = {
-    name: '',
-    folderId: '',
-    content: '',
+    name: "",
+    folderId: "",
+    content: "",
     error: null
   };
 
@@ -17,7 +18,11 @@ export default class AddFile extends Component {
     if (!name || name.length <= 3 || name.length >= 20) {
       this.setState({
         error:
-          'Name is required and must be more than three characters and less than 20'
+          "Name is required and must be more than three characters and less than 20"
+      });
+    } else if (!folderId) {
+      this.setState({
+        error: "You must choose a valid folder"
       });
     } else {
       this.props.addFile({ name, folderId, content, modified: Date.now() });
@@ -27,7 +32,7 @@ export default class AddFile extends Component {
     return (
       <div>
         <h2>Add File</h2>
-        <form onSubmit={this.handleSubmit}>
+        <form className="add-file-form" onSubmit={this.handleSubmit}>
           <label>
             Name
             <input
@@ -64,7 +69,7 @@ export default class AddFile extends Component {
             Add stuff to me...
           </textarea>
           {this.state.error && (
-            <p style={{ color: 'red' }}>{this.state.error}</p>
+            <p style={{ color: "red" }}>{this.state.error}</p>
           )}
           <input type="submit" value="Submit" />
         </form>

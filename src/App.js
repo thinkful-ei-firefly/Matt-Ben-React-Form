@@ -8,7 +8,7 @@ import NoteSidebar from "./components/NoteSidebar";
 import AppContext from "./context/AppContext";
 import AddFolder from "./components/AddFolder";
 import AddFile from "./components/AddFile";
-import ApiError from "./ApiError";
+import ErrorBoundary from "./ErrorBoundary";
 
 import "./App.css";
 
@@ -25,7 +25,7 @@ class App extends Component {
       this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
       this.props.history.push("/");
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   };
   addFolder = async nameObj => {
@@ -40,22 +40,22 @@ class App extends Component {
 
       this.props.history.push("/");
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   };
-  addFile = async nameObj => {
+  addFile = async fileData => {
     try {
       const res = await fetch(`http://localhost:9090/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nameObj)
+        body: JSON.stringify(fileData)
       });
       const resJson = await res.json();
       this.setState({ notes: [...this.state.notes, resJson] });
 
       this.props.history.push("/");
     } catch (error) {
-      throw new Error(error);
+      console.log(error);
     }
   };
   componentDidMount() {
@@ -77,7 +77,7 @@ class App extends Component {
         this.setState({ folders: responses[0], notes: responses[1] })
       )
       .catch(error => {
-        throw new Error(error);
+        console.log(error);
       });
   }
 
@@ -89,34 +89,31 @@ class App extends Component {
           value={{ folders, notes, deleteNote: this.deleteNote }}
         >
           <Header />
-          <ApiError>
-            <div className="sidebar">
-              <Switch>
-                <Route
-                  exact
-                  path="/notes/:noteId"
-                  render={props => <NoteSidebar {...props} />}
-                />
-                <Route render={props => <FolderList {...props} />} />
-              </Switch>
-            </div>
-            <div className="main">
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={props => <NoteList {...props} />}
-                />
-                <Route
-                  exact
-                  path="/folders/:folderId"
-                  render={props => <NoteList {...props} />}
-                />
-                <Route
-                  exact
-                  path="/notes/:notesId"
-                  render={props => <NotePage {...props} />}
-                />
+
+          <div className="sidebar">
+            <Switch>
+              <Route
+                exact
+                path="/notes/:noteId"
+                render={props => <NoteSidebar {...props} />}
+              />
+              <Route render={props => <FolderList {...props} />} />
+            </Switch>
+          </div>
+          <div className="main">
+            <Switch>
+              <Route exact path="/" render={props => <NoteList {...props} />} />
+              <Route
+                exact
+                path="/folders/:folderId"
+                render={props => <NoteList {...props} />}
+              />
+              <Route
+                exact
+                path="/notes/:notesId"
+                render={props => <NotePage {...props} />}
+              />
+              <ErrorBoundary>
                 <Route
                   exact
                   path="/add-folder"
@@ -135,9 +132,9 @@ class App extends Component {
                     />
                   )}
                 />
-              </Switch>
-            </div>
-          </ApiError>
+              </ErrorBoundary>
+            </Switch>
+          </div>
         </AppContext.Provider>
       </div>
     );

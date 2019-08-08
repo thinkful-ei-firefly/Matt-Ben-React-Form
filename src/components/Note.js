@@ -4,7 +4,7 @@ import AppContext from "../context/AppContext";
 import "./note.css";
 import PropTypes from "prop-types";
 
-const Note = ({ props }) => {
+const Note = props => {
   const date = new Date(props.modified).toLocaleDateString();
   const { deleteNote } = useContext(AppContext);
   return (
@@ -15,7 +15,12 @@ const Note = ({ props }) => {
         </Link>
       </h3>
       <div>Date modified: {date}</div>
-      <button onClick={() => deleteNote(props.id)}>Delete</button>
+      <button
+        className="note-list-item__button"
+        onClick={() => deleteNote(props.id)}
+      >
+        Delete
+      </button>
     </li>
   );
 };

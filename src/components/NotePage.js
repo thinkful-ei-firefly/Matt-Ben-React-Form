@@ -16,7 +16,13 @@ const NotePage = props => {
   );
 };
 NotePage.propTypes = {
-  notes: PropTypes.array.isRequired
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      folderId: PropTypes.string.isRequired,
+      content: PropTypes.string
+    })
+  )
 };
-
 export default NotePage;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class ApiError extends Component {
+export default class ErrorBoundary extends Component {
   state = { error: null };
   static getDerivedStateFromError(error) {
     console.error(error);

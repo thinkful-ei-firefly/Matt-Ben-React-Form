@@ -13,4 +13,9 @@ const Folder = props => {
   );
 };
 
+Folder.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
 export default Folder;

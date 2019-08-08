@@ -21,7 +21,12 @@ const FolderList = props => {
 };
 
 FolderList.propTypes = {
-  folder: PropTypes.arrayOf(PropTypes.object).isRequired
+  folders: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default FolderList;
