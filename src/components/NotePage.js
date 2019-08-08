@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import AppContext from "../context/AppContext";
 import Note from "./Note";
+import PropTypes from "prop-types";
 
 const NotePage = props => {
   const { notes } = useContext(AppContext);
@@ -13,6 +14,9 @@ const NotePage = props => {
       <p>{note.content}</p>
     </div>
   );
+};
+NotePage.propTypes = {
+  notes: PropTypes.array.isRequired
 };
 
 export default NotePage;

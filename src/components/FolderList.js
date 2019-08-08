@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import Folder from "./Folder";
 import AppContext from "../context/AppContext";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const FolderList = props => {
   const { folders } = useContext(AppContext);
@@ -17,6 +18,10 @@ const FolderList = props => {
       </button>
     </>
   );
+};
+
+FolderList.propTypes = {
+  folder: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default FolderList;

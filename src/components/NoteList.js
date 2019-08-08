@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
-import Note from './Note';
-import AppContext from '../context/AppContext';
-import { Link } from 'react-router-dom';
-import './note-list.css';
+import React, { useContext } from "react";
+import Note from "./Note";
+import AppContext from "../context/AppContext";
+import { Link } from "react-router-dom";
+import "./note-list.css";
+import PropTypes from "prop-types";
 
 const NoteList = props => {
   let notesList;
@@ -32,6 +33,10 @@ const NoteList = props => {
       </button>
     </>
   );
+};
+
+NoteList.propTypes = {
+  notes: PropTypes.array.isRequired
 };
 
 export default NoteList;

@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../context/AppContext";
 import "./note.css";
+import PropTypes from "prop-types";
 
-const Note = props => {
+const Note = ({ props }) => {
   const date = new Date(props.modified).toLocaleDateString();
   const { deleteNote } = useContext(AppContext);
   return (
@@ -17,6 +18,12 @@ const Note = props => {
       <button onClick={() => deleteNote(props.id)}>Delete</button>
     </li>
   );
+};
+Note.propTypes = {
+  deleteNote: PropTypes.func.isRequired,
+  modified: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default Note;
