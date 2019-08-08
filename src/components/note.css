@@ -1,0 +1,14 @@
+.note-list-item {
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  border: 1px solid #777;
+  padding: 0.5rem;
+  justify-content: space-evenly;
+}
+
+.note-list-item .note-list-item__link {
+  text-decoration: none;
+  color: blue;
+}
