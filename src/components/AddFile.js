@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import "./add-file.css";
+import React, { Component } from 'react';
+import './add-file.css';
 
 export default class AddFile extends Component {
   state = {
-    name: "",
-    folderId: "",
-    content: "",
+    name: '',
+    folderId: '',
+    content: '',
     error: null
   };
 
@@ -18,11 +18,11 @@ export default class AddFile extends Component {
     if (!name || name.length <= 3 || name.length >= 20) {
       this.setState({
         error:
-          "Name is required and must be more than three characters and less than 20"
+          'Name is required and must be more than three characters and less than 20'
       });
     } else if (!folderId) {
       this.setState({
-        error: "You must choose a valid folder"
+        error: 'You must choose a valid folder'
       });
     } else {
       this.props.addFile({ name, folderId, content, modified: Date.now() });
@@ -40,6 +40,9 @@ export default class AddFile extends Component {
               name="name"
               value={this.state.name}
               onChange={this.onChange}
+              aria-required="true"
+              aria-label="Name for new note to add"
+              aria-describedby="error"
               required
             />
           </label>
@@ -49,6 +52,9 @@ export default class AddFile extends Component {
               name="folderId"
               value={this.state.folderId}
               onChange={this.onChange}
+              aria-required="true"
+              aria-label="Select input to choose folder for new note"
+              aria-describedby="error"
               required
             >
               <option>--Please Choose a Folder--</option>
@@ -65,11 +71,14 @@ export default class AddFile extends Component {
             cols="33"
             value={this.state.content}
             onChange={this.onChange}
+            aria-label="Description input for new note"
           >
             Add stuff to me...
           </textarea>
           {this.state.error && (
-            <p style={{ color: "red" }}>{this.state.error}</p>
+            <p id="error" style={{ color: 'red' }}>
+              {this.state.error}
+            </p>
           )}
           <input type="submit" value="Submit" />
         </form>

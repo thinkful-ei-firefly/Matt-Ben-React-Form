@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import AppContext from "../context/AppContext";
-import "./note.css";
-import PropTypes from "prop-types";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AppContext from '../context/AppContext';
+import './note.css';
+import PropTypes from 'prop-types';
 
 const Note = props => {
   const date = new Date(props.modified).toLocaleDateString();
@@ -24,6 +24,7 @@ const Note = props => {
     </li>
   );
 };
+
 Note.propTypes = {
   deleteNote: PropTypes.func.isRequired,
   modified: PropTypes.string.isRequired,

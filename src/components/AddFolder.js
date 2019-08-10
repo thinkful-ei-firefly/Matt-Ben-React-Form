@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class AddFolder extends Component {
   state = {
-    name: "",
+    name: '',
     error: null
   };
 
@@ -15,7 +15,7 @@ export default class AddFolder extends Component {
     if (!name || name.length <= 3 || name.length >= 20) {
       this.setState({
         error:
-          "Name is required and must be more than three characters and less than 20"
+          'Name is required and must be more than three characters and less than 20'
       });
     } else {
       this.props.addFolder({ name });
@@ -33,11 +33,16 @@ export default class AddFolder extends Component {
               name="name"
               value={this.state.name}
               onChange={this.onChange}
+              aria-required="true"
+              aria-describedby="error"
+              aria-label="Name for new folder to add"
               required
             />
           </label>
           {this.state.error && (
-            <p style={{ color: "red" }}>{this.state.error}</p>
+            <p id="error" style={{ color: 'red' }}>
+              {this.state.error}
+            </p>
           )}
           <input type="submit" value="Submit" />
         </form>
