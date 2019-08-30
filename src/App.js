@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
-import Header from "./components/Header";
-import FolderList from "./components/FolderList";
-import NoteList from "./components/NoteList";
-import NotePage from "./components/NotePage";
-import NoteSidebar from "./components/NoteSidebar";
-import AppContext from "./context/AppContext";
-import AddFolder from "./components/AddFolder";
-import AddFile from "./components/AddFile";
-import ErrorBoundary from "./ErrorBoundary";
+import React, { Component } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import Header from './components/Header';
+import FolderList from './components/FolderList';
+import NoteList from './components/NoteList';
+import NotePage from './components/NotePage';
+import NoteSidebar from './components/NoteSidebar';
+import AppContext from './context/AppContext';
+import AddFolder from './components/AddFolder';
+import AddFile from './components/AddFile';
+import ErrorBoundary from './ErrorBoundary';
 
-import "./App.css";
+import './App.css';
 
 class App extends Component {
   state = {
@@ -21,53 +21,55 @@ class App extends Component {
 
   deleteNote = async id => {
     try {
-      await fetch(`http://localhost:9090/notes/${id}`, { method: "DELETE" });
+      await fetch(`http://localhost:8000/api/notes/${id}`, {
+        method: 'DELETE'
+      });
       this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
-      this.props.history.push("/");
+      this.props.history.push('/');
     } catch (error) {
       console.log(error);
     }
   };
   addFolder = async nameObj => {
     try {
-      const res = await fetch(`http://localhost:9090/folders`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(`http://localhost:8000/api/folders`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nameObj)
       });
       const resJson = await res.json();
       this.setState({ folders: [...this.state.folders, resJson] });
 
-      this.props.history.push("/");
+      this.props.history.push('/');
     } catch (error) {
       console.log(error);
     }
   };
   addFile = async fileData => {
     try {
-      const res = await fetch(`http://localhost:9090/notes`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(`http://localhost:8000/api/notes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fileData)
       });
       const resJson = await res.json();
       this.setState({ notes: [...this.state.notes, resJson] });
 
-      this.props.history.push("/");
+      this.props.history.push('/');
     } catch (error) {
       console.log(error);
     }
   };
   componentDidMount() {
     Promise.all([
-      fetch("http://localhost:9090/folders"),
-      fetch("http://localhost:9090/notes")
+      fetch('http://localhost:8000/api/folders'),
+      fetch('http://localhost:8000/api/notes')
     ])
       .then(responses => {
         console.log(responses);
         responses.forEach(response => {
           if (!response.ok) {
-            Promise.reject("sorry there was an issue");
+            Promise.reject('sorry there was an issue');
           }
         });
         return responses;

@@ -1,8 +1,8 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 const AppContext = createContext({
-  folders: null,
-  notes: null,
+  folders: [],
+  notes: [],
   deleteNote: () => {}
 });
 

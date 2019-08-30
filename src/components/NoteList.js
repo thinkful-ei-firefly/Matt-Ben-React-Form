@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import Note from "./Note";
-import AppContext from "../context/AppContext";
-import { Link } from "react-router-dom";
-import "./note-list.css";
-import PropTypes from "prop-types";
+import React, { useContext } from 'react';
+import Note from './Note';
+import AppContext from '../context/AppContext';
+import { Link } from 'react-router-dom';
+import './note-list.css';
+import PropTypes from 'prop-types';
 
 const NoteList = props => {
   let notesList;
   const { notes } = useContext(AppContext);
   if (props.match.params.folderId) {
     notesList = notes.filter(
-      note => note.folderId === props.match.params.folderId
+      note => note.folder_id === props.match.params.folder_id
     );
   } else {
     notesList = notes;
@@ -21,7 +21,7 @@ const NoteList = props => {
       <ul>
         {notesList.map(note => (
           <Note
-            name={note.name}
+            name={note.note_name}
             id={note.id}
             key={note.id}
             modified={note.modified}

@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import AppContext from "../context/AppContext";
-import PropTypes from "prop-types";
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import AppContext from '../context/AppContext';
+import PropTypes from 'prop-types';
 
 const NoteSidebar = ({ match: { params } }) => {
   const { folders, notes } = useContext(AppContext);
@@ -10,7 +10,7 @@ const NoteSidebar = ({ match: { params } }) => {
   return (
     <div>
       <Link to={`/folders/${folder.id}`}>Go Back</Link>
-      <h2>{folder.name}</h2>
+      <h2>{folder.folder_name}</h2>
     </div>
   );
 };
