@@ -9,6 +9,7 @@ import AppContext from './context/AppContext';
 import AddFolder from './components/AddFolder';
 import AddFile from './components/AddFile';
 import ErrorBoundary from './ErrorBoundary';
+import config from './config';
 
 import './App.css';
 
@@ -21,7 +22,7 @@ class App extends Component {
 
   deleteNote = async id => {
     try {
-      await fetch(`http://localhost:8000/api/notes/${id}`, {
+      await fetch(`${config.API_ENDPOINT}/api/notes/${id}`, {
         method: 'DELETE'
       });
       this.setState({ notes: this.state.notes.filter(note => note.id !== id) });
@@ -32,7 +33,7 @@ class App extends Component {
   };
   addFolder = async nameObj => {
     try {
-      const res = await fetch(`http://localhost:8000/api/folders`, {
+      const res = await fetch(`${config.API_ENDPOINT}/api/folders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nameObj)
@@ -47,7 +48,7 @@ class App extends Component {
   };
   addFile = async fileData => {
     try {
-      const res = await fetch(`http://localhost:8000/api/notes`, {
+      const res = await fetch(`${config.API_ENDPOINT}/api/notes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fileData)
@@ -62,8 +63,8 @@ class App extends Component {
   };
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:8000/api/folders'),
-      fetch('http://localhost:8000/api/notes')
+      fetch(`${config.API_ENDPOINT}/api/folders`),
+      fetch(`${config.API_ENDPOINT}/api/notes`)
     ])
       .then(responses => {
         console.log(responses);
