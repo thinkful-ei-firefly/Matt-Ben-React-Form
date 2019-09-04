@@ -67,7 +67,6 @@ class App extends Component {
       fetch(`${config.API_ENDPOINT}/api/notes`)
     ])
       .then(responses => {
-        console.log(responses);
         responses.forEach(response => {
           if (!response.ok) {
             Promise.reject('sorry there was an issue');
@@ -77,7 +76,10 @@ class App extends Component {
       })
       .then(responses => Promise.all(responses.map(res => res.json())))
       .then(responses =>
-        this.setState({ folders: responses[0], notes: responses[1] })
+        {
+          this.setState({ folders: responses[0], notes: responses[1] })
+          console.log(this.state.notes);
+        }
       )
       .catch(error => {
         console.log(error);

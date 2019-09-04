@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const FolderList = props => {
   const { folders } = useContext(AppContext);
-  console.log(folders[0]);
+  console.log(folders.forEach(folder => folder.name));
   return (
     <>
       <ul className="folder-list">
