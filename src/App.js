@@ -76,10 +76,7 @@ class App extends Component {
       })
       .then(responses => Promise.all(responses.map(res => res.json())))
       .then(responses =>
-        {
           this.setState({ folders: responses[0], notes: responses[1] })
-          console.log(this.state.notes);
-        }
       )
       .catch(error => {
         console.log(error);
